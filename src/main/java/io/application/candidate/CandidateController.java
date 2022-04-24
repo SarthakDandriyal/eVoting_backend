@@ -53,26 +53,4 @@ public class CandidateController {
     public void addvote(@PathVariable  String cid){
         candidateService.addVote(cid);
     }
-
-    @GetMapping("/result")
-    public ResponseEntity<byte[]> getReport() {
-        try {
-            String filePath = "./src/main/resources/CandidateReport.jrxml";
-            List<Candidate> list = (List<Candidate>) candidateService.getCandidateDetails();
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
-            JRBeanCollectionDataSource chartDataSource = new JRBeanCollectionDataSource(list);
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("tableData", dataSource);
-            JasperReport report = JasperCompileManager.compileReport(filePath);
-            JasperPrint print = JasperFillManager.fillReport(report, parameters, chartDataSource);
-            byte[] byteArray = JasperExportManager.exportReportToPdf(print);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("filename", "Election Report.pdf");
-            return new ResponseEntity<byte[]>(byteArray, headers, HttpStatus.OK);
-        } catch(Exception e) {
-            System.out.print("Exception in creating report.");
-            return new ResponseEntity<byte[]>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }
