@@ -47,12 +47,4 @@ public class Candidate {
     public void setVotes(Integer votes) {
         this.votes = votes;
     }
-
-    public String getC_id() {
-        return cId;
-    }
-
-    public void setC_id(String cId) {
-        this.cId = cId;
-    }
 }
