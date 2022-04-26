@@ -4,7 +4,7 @@
   tasks:
     - name: Pull mysql image
       docker_image:
-        name: mysql:5.7
+        name: mysql/mysql-server:latest
         source: pull
     - name: Pull backend image
       docker_image:
