@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7
+    image: mysql/mysql-server:latest
     container_name: db
     environment:
       MYSQL_DATABASE: 'electiondb'
@@ -12,8 +12,6 @@ services:
     ports:
       - '3306:3306'
     restart: always
-    volumes:
-      - my-db:/usr/local/bin/mysql
 
   backend:
     image: sarthakdandriyal/evoting_backend
@@ -38,5 +36,3 @@ services:
 
     depends_on:
       - backend
-volumes:
-  my-db:
